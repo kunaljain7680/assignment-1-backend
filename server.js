@@ -33,7 +33,7 @@ app.get('/api/top-rows', async (req, res) => {
 app.get('/api/joins', async (req, res) => {
     try {
         const pool = await sql.connect(config);
-        const result = await pool.request().query('SELECT TOP 20 * FROM SalesLT.Customer');
+        const result = await pool.request().query('SELECT p.Name,p.Color,p.Size,p.Weight FROM [SalesLT].[Product] p INNER JOIN [SalesLT].[ProductCategory] pc ON p.ProductCategoryID = pc.ProductCategoryID;');
         console.log(result)
         res.json(result.recordset);
     } catch (err) {
